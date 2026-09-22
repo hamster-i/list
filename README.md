@@ -1,6 +1,6 @@
  <div align="center" style="font-weight: bold;">
-  <h2><strong>🌟 Введение 🌟</strong></h2>
   <img src="https://github.com/hamster-i/tree/blob/main/tree.png" alt="Logo" width="120" height="120">
+  <h2><strong>🌟 Введение 🌟</strong></h2>
  </div>
  
  Добро пожаловать на официальную страницу проекта "Односвязный список". Это кроссплатформенный код для создания односвязного списка.
