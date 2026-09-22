@@ -60,8 +60,8 @@ typedef enum
 } TREE_RESULT;
 
 /// @defgroup Tree_Interface Интерфейсные функции
-/// @brief  Функции для работы с односвязным деревом
-/// @details Для работы с деревом необходимо использовать данные функции
+/// @brief  Функции для работы с односвязным списком
+/// @details Для работы со списком необходимо использовать функции
 ///@{
 TREE_RESULT Tree_AddNode(TREE* fTree, TREE_TYPE_DATA fType, const void* fData);
 TREE_RESULT Tree_Clear(TREE* fTree);
