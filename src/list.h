@@ -43,7 +43,7 @@ typedef struct list_node
   void*              Data; ///< данные узла
 }LIST_NODE;
 
-/// @brief  Структура дерева
+/// @brief  Структура списка
 typedef struct
 {
   LIST_NODE* Head; ///< 
