@@ -75,7 +75,7 @@ LIST_RESULT List_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData)
 /// @param [in,out] fList список
 /// @return Возвращает результат выполнения
 /// @retval LIST_RESULT_OK - нет ошибки
-LIST_RESULT LIST_Clear(LIST* fList)
+LIST_RESULT List_Clear(LIST* fList)
 {
   // сли дерево пустое выходим
   if(fList->Head == NULL) {return LIST_RESULT_OK;}
