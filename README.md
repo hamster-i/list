@@ -5,16 +5,16 @@
  
    Добро пожаловать на официальную страницу проекта "Односвязный список". Проект кроссплатформенного кода для создания односвязного списка.
  
- <h3 style="border-bottom: 1px solid #eaecef; padding-bottom: 0.2em;">Программа</h3>
+ <h3>Программа</h3>
  
   - [Исходный код](https://github.com/hamster-i/tree/tree/main/src)
   - [Тесты](https://github.com/hamster-i/tree/tree/main/test)
   
- <h3 style="border-bottom: 1px solid #eaecef; padding-bottom: 0.2em;">Документация</h3>
+ <h3>Документация</h3>
  
   - [Исходный код](https://hamster-i.github.io/tree/)
  
- <h3 style="border-bottom: 1px solid #eaecef; padding-bottom: 0.2em;">Быстрый старт</h3>
+ <h3>Быстрый старт</h3>
  
  1. Убедитесь, что используете компилятор с поддержкой C/C++.
  2. Подключите заголовочный файл:
