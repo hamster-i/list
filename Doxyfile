@@ -1,3 +1,4 @@
+PROJECT_NAME           = "Односвязный список"
 INPUT                  = .
 
 FILE_PATTERNS          = *.c \
