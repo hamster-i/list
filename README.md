@@ -1,6 +1,4 @@
  Документация проекта "Односвязное дерево"
- 
- [![Документация Doxygen](https://shields.io)](https://hamster-i.github.io/tree/)
 
  Посмотреть готовую документацию к коду можно здесь: [Документация проекта](https://hamster-i.github.io/tree/)
  
