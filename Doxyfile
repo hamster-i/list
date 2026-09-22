@@ -13,3 +13,5 @@ RECURSIVE              = YES
 OUTPUT_DIRECTORY       = docs
 
 GENERATE_HTML          = YES
+
+OUTPUT_LANGUAGE        = Russian
