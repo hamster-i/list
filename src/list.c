@@ -22,7 +22,8 @@
 
 /// @return Возвращает результат выполнения
 
-/// @retval LIST_RESULT_OK - нет ошибки
+/// @retval LIST_RESULT_ERROR_ADD_NODE - ошибка добавления узла
+/// @retval LIST_RESULT_OK             - нет ошибки
 
 LIST_RESULT List_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData)
 {
