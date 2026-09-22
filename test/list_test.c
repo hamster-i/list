@@ -1,10 +1,10 @@
 /*
  ============================================================================
- Name        : tree.c
+ Name        : list_test.c
  Author      : Volkov I.V.
  Version     :
  Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Description : test list in C, Ansi-style
  ============================================================================
  */
 
