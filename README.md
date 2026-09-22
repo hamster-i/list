@@ -27,4 +27,4 @@
  
  Автор: Hamster
  
- Copyright: (C) Copyright г.Ульяновск, 2026г.
+ Copyright: (C) г.Ульяновск, 2026г.
