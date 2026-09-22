@@ -62,8 +62,10 @@ typedef enum
 /// @brief  Функции для работы с односвязным списком
 /// @details В разработке...
 ///@{
+	
 LIST_RESULT LIST_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData);
 LIST_RESULT LIST_Clear(LIST* fList);
+
 /// @}
 
 #endif /* LIST_H_ */
