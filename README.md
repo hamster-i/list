@@ -2,7 +2,7 @@
   <h2><strong>🌟 Односвязный список 🌟</strong></h2>
  </div>
  
- <img src="<img src="https://unsplash.com" alt="Logo" width="120" height="120">" alt="Logo" width="120" height="120">
+ <img src="https://github.com/hamster-i/tree/blob/main/tree.png" alt="Logo" width="120" height="120">
  
  <p><i>
  Добро пожаловать в официальную страницу проекта. Это кроссплатформенный код для создания односвязного дерева.
