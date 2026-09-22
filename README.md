@@ -1,4 +1,4 @@
- <div align="center">
+ <div align="center" style="font-weight: bold;">
  **Односвязное дерево**
  </div>
  
