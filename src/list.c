@@ -15,11 +15,15 @@
 #include "list.h"
 
 /// @brief Добавление узла в список
-/// @param fList список
-/// @param fType тип добавляемых данных
-/// @param fData добавляемые данные
+
+/// @param [in,out] fList список
+/// @param [in] fType тип добавляемых данных
+/// @param [in] fData добавляемые данные
+
 /// @return Возвращает результат выполнения
+
 /// @retval LIST_RESULT_OK - нет ошибки
+
 LIST_RESULT List_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData)
 {
   // выделяем память под узел
@@ -71,9 +75,13 @@ LIST_RESULT List_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData)
 }
 
 /// @brief Очистка списка
-/// @param fList список
+
+/// @param [in,out] fList список
+
 /// @return Возвращает результат выполнения
+
 /// @retval LIST_RESULT_OK - нет ошибки
+
 LIST_RESULT LIST_Clear(LIST* fList)
 {
   // сли дерево пустое выходим
