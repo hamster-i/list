@@ -15,7 +15,6 @@
 #include "list.h"
 
 /// @brief Добавление узла в список
-
 /// @param [in,out] fList список
 /// @param [in] fType тип добавляемых данных
 /// @param [in] fData добавляемые данные
