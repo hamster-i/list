@@ -1,5 +1,7 @@
 text# Укажите, где лежит ваш код (точка означает текущую папку проекта)
-INPUT                  = src
+INPUT                  = .
+
+USE_MDFILE_AS_MAINPAGE = README.md
 
 # Разрешите рекурсивный поиск файлов в подпапках
 RECURSIVE              = YES
