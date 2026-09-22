@@ -14,11 +14,11 @@
 
 #include "list.h"
 
-/// @brief Добавление нода в дерево
-/// @param fLIST дерево
+/// @brief Добавление узла в список
+/// @param fList список
 /// @param fType тип добавляемых данных
 /// @param fData добавляемые данные
-/// @return  Не возвращает результат
+/// @return Возвращает результат выполнения
 /// @retval LIST_RESULT_OK - нет ошибки
 LIST_RESULT List_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData)
 {
@@ -70,8 +70,8 @@ LIST_RESULT List_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData)
   return LIST_RESULT_OK;
 }
 
-/// @brief Очистка дерева
-/// @param fLIST дерево
+/// @brief Очистка списка
+/// @param fList список
 /// @return  Не возвращает результат
 /// @retval LIST_RESULT_OK - нет ошибки
 LIST_RESULT LIST_Clear(LIST* fList)
