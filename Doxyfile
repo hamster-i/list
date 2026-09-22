@@ -7,6 +7,7 @@ FILE_PATTERNS          = *.c \
                          *.md
 
 USE_MDFILE_AS_MAINPAGE = README.md
+LAYOUT_FILE            = DoxygenLayout.xml
 
 RECURSIVE              = YES
 
@@ -17,3 +18,4 @@ GENERATE_HTML          = YES
 OUTPUT_LANGUAGE        = Russian
 DOXYFILE_ENCODING      = UTF-8
 INPUT_ENCODING         = UTF-8
+
