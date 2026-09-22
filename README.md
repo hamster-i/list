@@ -19,8 +19,8 @@
  - "Сетевое взаимодействие"
  - "Движок базы данных"
  
- @version 1.5.0
+ Версия 1.5.0
  
- @author Команда разработки SmartHome
+ Автор Hamster
  
- @copyright Copyright (c) 2026
+ Copyright (c) 2026
