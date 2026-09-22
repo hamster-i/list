@@ -1,4 +1,3 @@
-text# Укажите, где лежит ваш код (точка означает текущую папку проекта)
 INPUT                  = .
 
 FILE_PATTERNS          = *.c \
@@ -9,12 +8,8 @@ FILE_PATTERNS          = *.c \
 
 USE_MDFILE_AS_MAINPAGE = README.md
 
-# Разрешите рекурсивный поиск файлов в подпапках
 RECURSIVE              = YES
 
-# Укажите папку, куда Doxygen будет складывать готовую документацию
-# Для интеграции с GitHub Actions лучше использовать имя 'html' или 'docs'
 OUTPUT_DIRECTORY       = docs
 
-# Убедитесь, что генерация HTML включена
 GENERATE_HTML          = YES
