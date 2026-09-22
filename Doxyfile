@@ -16,6 +16,9 @@ OUTPUT_DIRECTORY       = docs
 
 GENERATE_HTML          = YES
 
+EXTRACT_ALL            = YES
+EXTRACT_STATIC         = YES
+
 OUTPUT_LANGUAGE        = Russian
 DOXYFILE_ENCODING      = UTF-8
 INPUT_ENCODING         = UTF-8
