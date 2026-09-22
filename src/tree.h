@@ -1,16 +1,15 @@
 //==================================================================================================
 /// @copyright (C) Copyright 2026 АО "УКБП"
+/// г. Ульяновск, Россия
 //
-// г. Ульяновск, Россия
-//
-/// @brief Компонент:
-/// @brief Назначение:
+/// @brief Компонент: Односвязный список
+/// @brief Назначение: Динамическое управление данными
 /// @brief Примечание: нет.
 //--------------------------------------------------------------------------------------------------
 // История изменений:
 //     дата     автор       CR  описание
 //--------------------------------------------------------------------------------------------------
-/// @version   21 сент. 2026 г.   i.volkov    ----- Начальная версия
+/// @version   22 сент. 2026 г.   i.volkov    ----- Начальная версия
 //
 //==================================================================================================
 
@@ -18,8 +17,8 @@
 #include <stddef.h>
 #include <string.h>
 
-#ifndef TREE_H_
-#define TREE_H_
+#ifndef LIST_H_
+#define LIST_H_
 
 //--------------------------------------------------------------------------------------------------
 // Определения и типы данных
@@ -28,43 +27,43 @@
 /// @brief  Тип добавляемых данных
 typedef enum
 {
-  TREE_TYPE_DATA_NO = 0, ///< не определен
-  TREE_TYPE_DATA_BYTE,   ///< байт
-  TREE_TYPE_DATA_SHORT,  ///< 2 байта
-  TREE_TYPE_DATA_INT,    ///< 4 байта
-  TREE_TYPE_DATA_LONG,   ///< 8 байт
-  TREE_TYPE_DATA_STRING, ///< строка
-} TREE_TYPE_DATA;
+  LISt_TYPE_DATA_NO = 0, ///< не определен
+  LIST_TYPE_DATA_BYTE,   ///< байт
+  LIST_TYPE_DATA_SHORT,  ///< 2 байта
+  LIST_TYPE_DATA_INT,    ///< 4 байта
+  LIST_TYPE_DATA_LONG,   ///< 8 байт
+  LIST_TYPE_DATA_STRING, ///< строка
+} LIST_TYPE_DATA;
 
 /// @brief  Структура узла
-typedef struct tree_node
+typedef struct list_node
 {
-  struct tree_node*  Next; ///< следующий узел
-  TREE_TYPE_DATA     Type; ///< тип данных
+  struct list_node*  Next; ///< следующий узел
+  LIST_TYPE_DATA     Type; ///< тип данных
   void*              Data; ///< данные узла
-}TREE_NODE;
+}LIST_NODE;
 
 /// @brief  Структура дерева
 typedef struct
 {
-  TREE_NODE* Head; ///< 
-  TREE_NODE* End;  ///< 
-} TREE;
+  LIST_NODE* Head; ///< 
+  LIST_NODE* End;  ///< 
+} LIST;
 
 /// @brief  Результат функций
 typedef enum
 {
-  TREE_RESULT_OK = 0,         ///< нет ошибки
-  TREE_RESULT_ERROR_ADD_NODE, ///< ошибка добавления нода
-  TREE_RESULT_ERROR_ADD_DATA, ///< ошибка добавления данных
-} TREE_RESULT;
+  LIST_RESULT_OK = 0,         ///< нет ошибки
+  LIST_RESULT_ERROR_ADD_NODE, ///< ошибка добавления нода
+  LIST_RESULT_ERROR_ADD_DATA, ///< ошибка добавления данных
+} LIST_RESULT;
 
-/// @defgroup Tree_Interface Интерфейсные функции
+/// @defgroup LIST_Interface Интерфейсные функции
 /// @brief  Функции для работы с односвязным списком
 /// @details Для работы со списком необходимо использовать функции
 ///@{
-TREE_RESULT Tree_AddNode(TREE* fTree, TREE_TYPE_DATA fType, const void* fData);
-TREE_RESULT Tree_Clear(TREE* fTree);
+LIST_RESULT LIST_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData);
+LIST_RESULT LIST_Clear(LIST* fList);
 /// @}
 
-#endif /* TREE_H_ */
+#endif /* LIST_H_ */

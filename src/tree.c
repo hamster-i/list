@@ -1,41 +1,40 @@
 //==================================================================================================
-// (C) Copyright 2026 АО "УКБП"
-// г. Ульяновск, Россия
+/// @copyright (C) Copyright 2026 АО "УКБП"
+/// г. Ульяновск, Россия
 //
-// Компонент:
-// Назначение:
-// Примечание: нет.
+/// @brief Компонент: Односвязный список
+/// @brief Назначение: Динамическое управление данными
+/// @brief Примечание: нет.
 //--------------------------------------------------------------------------------------------------
 // История изменений:
 //     дата     автор       CR  описание
 //--------------------------------------------------------------------------------------------------
-//   21 сент. 2026 г.   i.volkov    ----- Начальная версия
+//   22 сент. 2026 г.   i.volkov    ----- Начальная версия
 //==================================================================================================
 
-#include "tree.h"
+#include "list.h"
 
-// @brief добавление нода в дерево
-
-// @param fTree дерево
-// @param fType тип добавляемых данных
-// @param fData добавляемые данные
-// @return  Не возвращает результат
-
-TREE_RESULT Tree_AddNode(TREE* fTree, TREE_TYPE_DATA fType, const void* fData)
+/// @brief Добавление нода в дерево
+/// @param fLIST дерево
+/// @param fType тип добавляемых данных
+/// @param fData добавляемые данные
+/// @return  Не возвращает результат
+/// @retval LIST_RESULT_OK - нет ошибки
+LIST_RESULT List_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData)
 {
   // выделяем память под узел
-  TREE_NODE* fNode = malloc(sizeof(TREE_NODE));
-  if(fNode == NULL) {return TREE_RESULT_ERROR_ADD_NODE;} // если ошибка выделения памяти под узел
+  LIST_NODE* fNode = malloc(sizeof(LIST_NODE));
+  if(fNode == NULL) {return LIST_RESULT_ERROR_ADD_NODE;} // если ошибка выделения памяти под узел
 
   // выделяем память под данные
   fNode->Type = fType;
   switch(fNode->Type)
   {
-    case TREE_TYPE_DATA_BYTE:
+    case LIST_TYPE_DATA_BYTE:
       fNode->Data = malloc(sizeof(char));
       *(char*)fNode->Data = *(const char*)fData;
       break;
-    case TREE_TYPE_DATA_STRING:
+    case LIST_TYPE_DATA_STRING:
       // если тип данных строка
       fNode->Data = malloc(strlen((const char*)fData));
       strcpy((char*)fNode->Data, (const char*) fData);
@@ -50,43 +49,46 @@ TREE_RESULT Tree_AddNode(TREE* fTree, TREE_TYPE_DATA fType, const void* fData)
   {
     // закрываем выделенные ресурсы и выходим
     free(fNode);
-    return TREE_RESULT_ERROR_ADD_DATA;
+    return LIST_RESULT_ERROR_ADD_DATA;
   }
 
   // добавляем нод
   fNode->Next = NULL;
-  if(fTree->Head == NULL)
+  if(fLIST->Head == NULL)
   {
     // добавление первого узла в пустое дерево
-    fTree->Head = fNode;
-    fTree->End = fTree->Head;
+    fList->Head = fNode;
+    fList->End = fLIST->Head;
   }
   else
   {
     // добавление очередного узла в дерево
-    fTree->End->Next = fNode;
-    fTree->End = fNode;
+    fList->End->Next = fNode;
+    fList->End = fNode;
   }
 
-  return TREE_RESULT_OK;
+  return LIST_RESULT_OK;
 }
 
-// очистка дерева
-TREE_RESULT Tree_Clear(TREE* fTree)
+/// @brief Очистка дерева
+/// @param fLIST дерево
+/// @return  Не возвращает результат
+/// @retval LIST_RESULT_OK - нет ошибки
+LIST_RESULT LIST_Clear(LIST* fList)
 {
   // сли дерево пустое выходим
-  if(fTree->Head == NULL) {return TREE_RESULT_OK;}
+  if(fList->Head == NULL) {return LIST_RESULT_OK;}
 
   // перебираем узлы с первого закрывая память текущего узла
-  TREE_NODE* fTemp;
+  LIST_NODE* fTemp;
   do
   {
-    fTemp = fTree->Head;
-    fTree->Head = fTree->Head->Next;
+    fTemp = fList->Head;
+    fList->Head = fList->Head->Next;
     free(fTemp->Data); // закрываем буфер данных
     free(fTemp);       // закрываем буфер узла
-  } while(fTree->Head != NULL);
-  fTree->End = NULL;
+  } while(fList->Head != NULL);
+  fList->End = NULL;
 
-  return TREE_RESULT_OK;
+  return LIST_RESULT_OK;
 }
