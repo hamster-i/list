@@ -1,0 +1,62 @@
+\doxysection{tree.\+h}
+\hypertarget{tree_8h_source}{}\label{tree_8h_source}\index{E:/tutor/tree2/src/tree.h@{E:/tutor/tree2/src/tree.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00001}00001\ \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00003}00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00004}00004\ \textcolor{comment}{//\ г.\ Ульяновск,\ Россия}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00005}00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00009}00009\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00010}00010\ \textcolor{comment}{//\ История\ изменений:}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00011}00011\ \textcolor{comment}{//\ \ \ \ \ дата\ \ \ \ \ автор\ \ \ \ \ \ \ CR\ \ описание}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00012}00012\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00014}00014\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00015}00015\ \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00019}00019\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00021}00021\ \textcolor{preprocessor}{\#ifndef\ TREE\_H\_}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00022}00022\ \textcolor{preprocessor}{\#define\ TREE\_H\_}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00024}00024\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00025}00025\ \textcolor{comment}{//\ Определения\ и\ типы\ данных}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00026}00026\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00029}00029\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00030}00030\ \{}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00031}00031\ \ \ TREE\_TYPE\_DATA\_NO\ =\ 0,\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00032}00032\ \ \ TREE\_TYPE\_DATA\_BYTE,\ \ \ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00033}00033\ \ \ TREE\_TYPE\_DATA\_SHORT,\ \ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00034}00034\ \ \ TREE\_TYPE\_DATA\_INT,\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00035}00035\ \ \ TREE\_TYPE\_DATA\_LONG,\ \ \ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00036}00036\ \ \ TREE\_TYPE\_DATA\_STRING,\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00037}00037\ \}\ TREE\_TYPE\_DATA;}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00040}\doxymbox{\hyperlink{structtree__node}{00040}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structtree__node}{tree\_node}}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00041}00041\ \{}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00042}\doxymbox{\hyperlink{structtree__node_a509b33bb32a4bc3e294547b9d561cff6}{00042}}\ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structtree__node}{tree\_node}}*\ \ \doxymbox{\hyperlink{structtree__node_a509b33bb32a4bc3e294547b9d561cff6}{Next}};\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00043}\doxymbox{\hyperlink{structtree__node_a3fb53f0984e27a64f5f5336b4069ba09}{00043}}\ \ \ TREE\_TYPE\_DATA\ \ \ \ \ \doxymbox{\hyperlink{structtree__node_a3fb53f0984e27a64f5f5336b4069ba09}{Type}};\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00044}\doxymbox{\hyperlink{structtree__node_a93462051e04a57e2459e6a2ab149a01c}{00044}}\ \ \ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structtree__node_a93462051e04a57e2459e6a2ab149a01c}{Data}};\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00045}00045\ \}TREE\_NODE;}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00048}\doxymbox{\hyperlink{struct_t_r_e_e}{00048}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00049}00049\ \{}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00050}00050\ \ \ TREE\_NODE*\ Head;\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00051}00051\ \ \ TREE\_NODE*\ End;\ \ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00052}00052\ \}\ \doxymbox{\hyperlink{struct_t_r_e_e}{TREE}};}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00055}00055\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00056}00056\ \{}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00057}00057\ \ \ TREE\_RESULT\_OK\ =\ 0,\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00058}00058\ \ \ TREE\_RESULT\_ERROR\_ADD\_NODE,\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00059}00059\ \ \ TREE\_RESULT\_ERROR\_ADD\_DATA,\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00060}00060\ \}\ TREE\_RESULT;}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00066}00066\ TREE\_RESULT\ Tree\_AddNode(\doxymbox{\hyperlink{struct_t_r_e_e}{TREE}}*\ fTree,\ TREE\_TYPE\_DATA\ fType,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ fData);}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00067}00067\ TREE\_RESULT\ Tree\_Clear(\doxymbox{\hyperlink{struct_t_r_e_e}{TREE}}*\ fTree);}
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{tree_8h_source_l00070}00070\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ TREE\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}
