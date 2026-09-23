@@ -5,12 +5,12 @@
  
   > Добро пожаловать на официальную страницу проекта "Односвязный список". Проект кроссплатформенного кода для создания односвязного списка.
  
- ## ![App](https://shields.io) Программа
+ ## 💻 Программа
  
   - [Исходный код](https://github.com/hamster-i/list/tree/main/src)
   - [Тесты](https://github.com/hamster-i/tree/list/main/test)
   
- ## 📌 Докумментация doxygen
+ ## 📖 Докумментация doxygen
  
   - [Исходный код](https://hamster-i.github.io/list/)
  
