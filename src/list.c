@@ -18,8 +18,9 @@
 /// @param [in] fType тип добавляемых данных
 /// @param [in] fData добавляемые данные
 /// @return Возвращает результат выполнения
-/// @retval LIST_RESULT_ERROR_ADD_NODE - ошибка добавления узла
-/// @retval LIST_RESULT_OK             - нет ошибки
+/// @retval LIST_RESULT_ERROR_ADD_NODE ошибка добавления узла
+/// @retval LIST_RESULT_ERROR_ADD_DATA ошибка добавления данных
+/// @retval LIST_RESULT_OK нет ошибки
 LIST_RESULT List_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData)
 {
   // выделяем память под узел
@@ -73,7 +74,7 @@ LIST_RESULT List_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData)
 /// @brief Очистка списка
 /// @param [in,out] fList список
 /// @return Возвращает результат выполнения
-/// @retval LIST_RESULT_OK - нет ошибки
+/// @retval LIST_RESULT_OK нет ошибки
 LIST_RESULT List_Clear(LIST* fList)
 {
   // сли дерево пустое выходим
