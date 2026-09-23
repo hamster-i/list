@@ -5,7 +5,7 @@
  
   > Добро пожаловать на официальную страницу проекта "Односвязный список". Проект кроссплатформенного кода для создания односвязного списка.
  
- ## ![C](https://shields.io) Программа
+ ## ![App](https://shields.io) Программа
  
   - [Исходный код](https://github.com/hamster-i/list/tree/main/src)
   - [Тесты](https://github.com/hamster-i/tree/list/main/test)
