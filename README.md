@@ -8,7 +8,7 @@
  ## 💻 Программа
  
   - [Исходный код](https://github.com/hamster-i/list/tree/main/src)
-  - [Тесты](https://github.com/hamster-i/tree/list/tree/main/test)
+  - [Тесты](https://github.com/hamster-i/list/tree/main/test)
   
  ## 📖 Докумментация doxygen
  
