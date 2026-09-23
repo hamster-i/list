@@ -4,28 +4,28 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../tree_test/tree_test.c 
+../test/list_test.c 
 
 C_DEPS += \
-./tree_test/tree_test.d 
+./test/list_test.d 
 
 OBJS += \
-./tree_test/tree_test.o 
+./test/list_test.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-tree_test/%.o: ../tree_test/%.c tree_test/subdir.mk
+test/%.o: ../test/%.c test/subdir.mk
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cygwin C Compiler'
-	gcc -I"E:\eclipse\tree\src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -o "$@" "$<"
+	gcc -I"D:\github\list\src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
 
-clean: clean-tree_test
+clean: clean-test
 
-clean-tree_test:
-	-$(RM) ./tree_test/tree_test.d ./tree_test/tree_test.o
+clean-test:
+	-$(RM) ./test/list_test.d ./test/list_test.o
 
-.PHONY: clean-tree_test
+.PHONY: clean-test
 

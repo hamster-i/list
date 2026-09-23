@@ -54,11 +54,11 @@ LIST_RESULT List_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData)
 
   // добавляем нод
   fNode->Next = NULL;
-  if(fLIST->Head == NULL)
+  if(fList->Head == NULL)
   {
     // добавление первого узла в пустое дерево
     fList->Head = fNode;
-    fList->End = fLIST->Head;
+    fList->End = fList->Head;
   }
   else
   {

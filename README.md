@@ -1,5 +1,5 @@
  <div align="center" style="font-weight: bold;">
-  <img src="https://github.com/hamster-i/tree/blob/main/logo.png" alt="Logo" width="120" height="120">
+  <img src="https://github.com/hamster-i/list/blob/main/logo.png" alt="Logo" width="120" height="120">
   <h2><strong>🌟 Введение 🌟</strong></h2>
  </div>
  
@@ -7,12 +7,12 @@
  
  <h3>Программа</h3>
  
-  - [Исходный код](https://github.com/hamster-i/tree/tree/main/src)
-  - [Тесты](https://github.com/hamster-i/tree/tree/main/test)
+  - [Исходный код](https://github.com/hamster-i/list/tree/main/src)
+  - [Тесты](https://github.com/hamster-i/tree/list/main/test)
   
  <h3>Документация</h3>
  
-  - [Исходный код](https://hamster-i.github.io/tree/)
+  - [Исходный код](https://hamster-i.github.io/list/)
  
  <h3>Быстрый старт</h3>
  
