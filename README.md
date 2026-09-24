@@ -1,5 +1,5 @@
  <div align="center" style="font-weight: bold;">
-  <img src="https://github.com/hamster-i/list/blob/main/logo.png" alt="Logo" width="120" height="120">
+  <img src="https://github.com/hamster-i/list/blob/main/img/logo.jpg" alt="Logo" width="120" height="120">
   <h2><strong>🌟 Введение 🌟</strong></h2>
  </div>
  
