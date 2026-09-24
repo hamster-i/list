@@ -26,6 +26,7 @@ graph TD;
  
 <details>
 <summary>Выполните следующие шаги, чтобы скомпилировать программу из исходного кода.</summary>
+
  ### Шаг 1. Клонирование исходного кода из репозитория
   ```bash
   git clone https://github.com/hamster-i/list
