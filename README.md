@@ -10,7 +10,7 @@
   - [Исходный код](https://github.com/hamster-i/list/tree/main/src)
   - [Тесты](https://github.com/hamster-i/list/tree/main/test)
   
- ## 📖 Докумментация doxygen
+ ## 📖 Докумментация (Doxygen)
  
   - [Исходный код](https://hamster-i.github.io/list/)
  
