@@ -21,6 +21,12 @@
 /// @retval LIST_RESULT_ERROR_ADD_NODE ошибка добавления узла
 /// @retval LIST_RESULT_ERROR_ADD_DATA ошибка добавления данных
 /// @retval LIST_RESULT_OK нет ошибки
+/** @startuml
+  * Пользователь -> NetworkController: send_data()
+  * NetworkController -> Connection: active_write()
+  * Connection --> Пользователь: OK
+  * @enduml
+  */
 LIST_RESULT List_AddNode(LIST* fList, LIST_TYPE_DATA fType, const void* fData)
 {
   // выделяем память под узел
