@@ -22,3 +22,28 @@ EXTRACT_STATIC         = YES
 OUTPUT_LANGUAGE        = Russian
 DOXYFILE_ENCODING      = UTF-8
 INPUT_ENCODING         = UTF-8
+
+# Включаем использование утилиты 'dot' из пакета Graphviz
+HAVE_DOT               = YES
+
+# Строить UML-подобные диаграммы классов со списками методов и полей
+UML_LOOK               = YES
+
+# Показывать private и protected поля/методы на UML-диаграммах
+UML_LIMIT_NUM_FIELDS   = 50
+
+# Генерировать диаграммы наследования (кто от кого унаследован)
+CLASS_GRAPH            = YES
+
+# Генерировать диаграммы сотрудничества (показывает поля-указатели/объекты других классов)
+COLLABORATION_GRAPH    = YES
+
+# Включает генерацию графиков вызовов функций (кто кого вызывает) — очень полезно для архитектуры
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+
+# Формат картинок (SVG — лучший выбор: масштабируется без потери качества и в нем работают ссылки)
+DOT_IMAGE_FORMAT       = svg
+
+# Если Doxygen пишет, что не может найти 'dot', укажите путь к бинарнику вручную (пример для Windows):
+# DOT_PATH               = "C:/Program Files/Graphviz/bin"
