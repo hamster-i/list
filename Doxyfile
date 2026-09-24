@@ -23,6 +23,8 @@ OUTPUT_LANGUAGE        = Russian
 DOXYFILE_ENCODING      = UTF-8
 INPUT_ENCODING         = UTF-8
 
+PLANTUML_JAR_PATH      = "C:/path/to/plantuml.jar"
+
 # Включаем использование утилиты 'dot' из пакета Graphviz
 HAVE_DOT               = YES
 
