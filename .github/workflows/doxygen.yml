@@ -1,76 +1,30 @@
-name: Deploy Doxygen Documentation
+name: Generate Documentation
 
+# Запуск при каждом пуше в ветку main/master или вручную
 on:
   push:
-    branches:
-      - main
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+    branches: [ "main", "master" ]
+  workflow_dispatch:
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  docs:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      # 1. Клонируем репозиторий
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # Устанавливаем Node.js (он необходим для npm)
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      # 🛠️ ГАРАНТИРОВАННАЯ УСТАНОВКА АКТУАЛЬНОГО DOXYGEN ЧЕРЕЗ NPM & GRAPHVIZ
-      - name: Install Latest Doxygen via NPM & Graphviz
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y graphviz
-          
-          # Устанавливаем официальный бинарник doxygen глобально в систему через npm
-          sudo npm install -g doxygen
-          
-          # Принудительно связываем путь для глобального вызова команды в bash
-          sudo ln -sf $(which doxygen) /usr/local/bin/doxygen
-          
-          echo "=== ПРОВЕРКА ОБНОВЛЕННОЙ ВЕРСИИ ==="
-          doxygen --version
-
-      # Очищаем папки перед генерацией
-      - name: Clear old folders
-        run: |
-          rm -rf ./docs_output
-          mkdir -p ./docs_output/html
-
-      # Запуск сборки новой версией (из корня, где лежит ваш Doxyfile)
+      # 2. Запускаем Doxygen (он автоматически найдет ваш Doxyfile)
       - name: Run Doxygen
-        run: |
-          doxygen ./Doxyfile
-
-      # Проверяем файлы
-      - name: Check generated files
-        run: |
-          echo "=== Список файлов для публикации ==="
-          ls -la ./docs_output/html/
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      # Выгружаем созданную папку напрямую на хостинг
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: mattnotexist/doxygen-action@v1
         with:
-          path: 'docs_output/html'
+          # Вы можете указать путь к вашему Doxyfile, если он лежит не в корне
+          doxyfile-path: './Doxyfile' 
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      # 3. (Опционально) Сохраняем готовую документацию как артефакт
+      - name: Upload Artifacts
+        uses: actions/artifacts-action@v1 # Обновленный официальный экшен для работы с артефактами
+        with:
+          name: doxygen-docs
+          # Укажите папку, куда Doxygen складывает HTML (зависит от настроек в Doxyfile, обычно html или docs/html)
+          path: html/ 
