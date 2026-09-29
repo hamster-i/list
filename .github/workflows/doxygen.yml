@@ -18,23 +18,30 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: \${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Doxygen
+      # 🛠️ Исправлено: удален ручной `apt-get install doxygen`, так как mattnotmitt/doxygen-action сам развернет актуальный Doxygen.
+      # Мы оставляем только graphviz (для отрисовки классических диаграмм Doxygen, если они нужны).
+      - name: Install Graphviz
         run: |
           sudo apt-get update
-          sudo apt-get install -y doxygen graphviz
+          sudo apt-get install -y graphviz
 
+      # 🛠️ Исправлено: Убран лишний отступ (был сдвиг у doxyfile-path)
       - name: Run Doxygen
-        run: doxygen Doxyfile
+        uses: mattnotmitt/doxygen-action@edge
+        with:
+          doxyfile-path: './docs/Doxyfile'
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      # 🛠️ Важно проверить: путь к собранному HTML должен строго совпадать с OUTPUT_DIRECTORY в вашем Doxyfile.
+      # Если в Doxyfile указано OUTPUT_DIRECTORY = docs/, то Doxygen соберет всё в docs/html.
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
