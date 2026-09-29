@@ -2,7 +2,7 @@ PROJECT_NAME           = "Односвязный список"
 # КРИТИЧНО: Отключаем падение сборки при любых предупреждениях в коде
 WARN_AS_ERROR          = NO
 
-INPUT                  = ../src ../README.md
+INPUT                  = src/ README.md
 
 FILE_PATTERNS          = *.c \
                          *.cc \
