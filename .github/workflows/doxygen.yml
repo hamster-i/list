@@ -24,48 +24,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 1. Устанавливаем только Graphviz, а Doxygen скачиваем СВЕЖИЙ вручную
-      - name: Install Latest Doxygen & Graphviz
+      # Просто устанавливаем Doxygen из встроенных пакетов Ubuntu 24.04
+      - name: Install Doxygen & Graphviz
         run: |
           sudo apt-get update
-          sudo apt-get install -y graphviz wget python3
-          
-          # Скачиваем официальный стабильный бинарник свежей версии Doxygen
-          wget https://github.com
-          tar -f doxygen-1.12.0.linux.bin.tar.gz -xz
-          
-          # Принудительно заменяем системный doxygen на новый
-          sudo cp doxygen-1.12.0/bin/doxygen /usr/local/bin/doxygen
-          
-          # Проверяем версию в логах (должно выдать 1.12.0+)
-          echo "=== ИСПОЛЬЗУЕМАЯ ВЕРСИЯ DOXYGEN ==="
-          doxygen --version
+          sudo apt-get install -y doxygen graphviz
 
-      # 2. Очищаем старые папки перед сборкой, чтобы исключить кэширование старья
-      - name: Clear old artifacts
+      # Очищаем старые папки, чтобы не было конфликтов путей
+      - name: Clear old folders
         run: |
           rm -rf ./docs
           mkdir -p ./docs/html
 
-      # 3. Запускаем сборку новой версией
+      # Запуск сборки
       - name: Run Doxygen
         run: |
-          /usr/local/bin/doxygen ./docs/Doxyfile
+          doxygen ./docs/Doxyfile
 
-      # 4. Проверяем, что файлы сгенерированы именно сейчас
+      # Проверяем, появились ли сгенерированные файлы
       - name: Check generated files
         run: |
-          echo "=== Список свежих файлов ==="
+          echo "=== Список созданных файлов для сайта ==="
           ls -la ./docs/html/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # 5. Выгружаем только что созданную папку
+      # Загружаем собранную папку
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'docs/html'
+          path: 'docs_output/html'
 
       - name: Deploy to GitHub Pages
         id: deployment
