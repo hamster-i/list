@@ -24,23 +24,44 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 🛠️ ИСПОЛЬЗУЕМ СВЕЖИЙ ЭКШЕН: Он автоматически скачает актуальный Doxygen (1.12.0+)
-      - name: Run Latest Doxygen
-        uses: mattnotmitt/doxygen-action@edge
+      # 🛠️ ГАРАНТИРОВАННО УСТАНАВЛИВАЕМ ПОСЛЕДНЮЮ ВЕРСИЯ DOXYGEN НАПРЯМУЮ В СИСТЕМУ
+      - name: Setup Doxygen
+        uses: sillelien/setup-doxygen@v2
         with:
-          doxyfile-path: './Doxyfile' # Ссылка на файл в корне репозитория
+          doxygen-version: 'latest' # Автоматически скачает самую свежую версию с GitHub
+
+      # Устанавливаем Graphviz для отрисовки классических диаграмм связей
+      - name: Install Graphviz
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz
+
+      # Очищаем папки перед сборкой, чтобы избежать кэширования старья
+      - name: Clear old artifacts
+        run: |
+          rm -rf ./docs_output
+          mkdir -p ./docs_output/html
+
+      # Запускаем сборку (теперь нативной свежей версией doxygen из системы)
+      - name: Run Doxygen
+        run: |
+          doxygen --version # Выведет актуальную версию в логи для проверки
+          doxygen ./Doxyfile
+
+      # Проверяем, что файлы физически появились на диске
+      - name: Check generated files
+        run: |
+          echo "=== Список свежих файлов ==="
+          ls -la ./docs_output/html/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # 🛠️ ВАЖНО: Проверьте путь! Экшен mattnotmitt сохраняет html-код сайта
-      # строго туда, куда указывает параметр OUTPUT_DIRECTORY внутри вашего Doxyfile.
-      # Если в Doxyfile написано OUTPUT_DIRECTORY = ./docs_output, а HTML_OUTPUT = html,
-      # то путь ниже должен быть 'docs_output/html'.
+      # Выгружаем готовую папку
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'docs/html'
+          path: 'docs_output/html'
 
       - name: Deploy to GitHub Pages
         id: deployment
