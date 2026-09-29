@@ -41,7 +41,7 @@ jobs:
         run: |
           echo "=== Ищем файл конфигурации doxygen ==="
           # Находим путь к файлу конфигурации (игнорируя регистр букв)
-          CONFIG_PATH=$(find . -iname "doxyfile" | head -n 1)
+          CONFIG_PATH=$(find . -iname "Doxyfile" | head -n 1)
           
           if [ -z "$CONFIG_PATH" ]; then
             echo "КРИТИЧЕСКАЯ ОШИБКА: Файл Doxyfile вообще не найден в репозитории!"
