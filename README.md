@@ -23,7 +23,7 @@
   
  ## 📖 Докумментация (Doxygen)
  
-  - [Исходный код](https://hamster-i.github.io/list/docs/)
+  - [Исходный код](https://hamster-i.github.io/list/)
   
  ## 📦 Сборка и Запуск (Building)
  
