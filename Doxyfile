@@ -1,28 +1,54 @@
-name: Generate Documentation
+PROJECT_NAME           = "Односвязный список"
+# КРИТИЧНО: Отключаем падение сборки при любых предупреждениях в коде
+WARN_AS_ERROR          = NO
 
-on:
-  push:
-    branches: [ "main", "master" ]
-  workflow_dispatch:
+INPUT                  = ./src ./README.md
 
-jobs:
-  docs:
-    runs-on: ubuntu-latest
-    steps:
-      # 1. Клонируем ваш репозиторий
-      - name: Checkout code
-        uses: actions/checkout@v4
+FILE_PATTERNS          = *.c \
+                         *.cc \
+                         *.cpp \
+                         *.h \
+                         *.md
 
-      # 2. Запускаем Doxygen (исправленный mattnotmitt)
-      - name: Run Doxygen
-        uses: mattnotmitt/doxygen-action@v1
-        with:
-          doxyfile-path: './Doxyfile' 
+USE_MDFILE_AS_MAINPAGE = README.md
+LAYOUT_FILE            = DoxygenLayout.xml
 
-      # 3. Сохраняем готовую документацию как артефакт (исправленный upload-artifact)
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: doxygen-docs
-          # Убедитесь, что этот путь совпадает с OUTPUT_DIRECTORY в вашем Doxyfile (обычно html или docs/html)
-          path: docs/html/ 
+RECURSIVE              = YES
+
+OUTPUT_DIRECTORY       = ./docs
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+
+EXTRACT_ALL            = YES
+EXTRACT_STATIC         = YES
+
+OUTPUT_LANGUAGE        = Russian
+DOXYFILE_ENCODING      = UTF-8
+INPUT_ENCODING         = UTF-8
+
+PLANTUML_JAR_PATH      = "C:/path/to/plantuml.jar"
+
+# Включаем использование утилиты 'dot' из пакета Graphviz
+HAVE_DOT               = YES
+
+# Строить UML-подобные диаграммы классов со списками методов и полей
+UML_LOOK               = YES
+
+# Показывать private и protected поля/методы на UML-диаграммах
+UML_LIMIT_NUM_FIELDS   = 50
+
+# Генерировать диаграммы наследования (кто от кого унаследован)
+CLASS_GRAPH            = YES
+
+# Генерировать диаграммы сотрудничества (показывает поля-указатели/объекты других классов)
+COLLABORATION_GRAPH    = YES
+
+# Включает генерацию графиков вызовов функций (кто кого вызывает) — очень полезно для архитектуры
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+
+# Формат картинок (SVG — лучший выбор: масштабируется без потери качества и в нем работают ссылки)
+DOT_IMAGE_FORMAT       = svg
+
+# Если Doxygen пишет, что не может найти 'dot', укажите путь к бинарнику вручную (пример для Windows):
+# DOT_PATH               = "C:/Program Files/Graphviz/bin"
