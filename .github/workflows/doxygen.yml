@@ -18,30 +18,32 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: \${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 🛠️ Исправлено: удален ручной `apt-get install doxygen`, так как mattnotmitt/doxygen-action сам развернет актуальный Doxygen.
-      # Мы оставляем только graphviz (для отрисовки классических диаграмм Doxygen, если они нужны).
-      - name: Install Graphviz
+      # Скачиваем и устанавливаем САМУЮ свежую версию Doxygen напрямую в систему Ubuntu
+      - name: Install Latest Doxygen & Graphviz
         run: |
           sudo apt-get update
-          sudo apt-get install -y graphviz
+          sudo apt-get install -y graphviz wget python3
+          # Скачиваем официальный стабильный бинарник Doxygen (нативный, со стопроцентной поддержкой Mermaid и bash)
+          wget https://github.com
+          tar -f doxygen-1.12.0.linux.bin.tar.gz -xz
+          sudo cp doxygen-1.12.0/bin/doxygen /usr/local/bin/
+          doxygen --version # Проверка версии в логах
 
-      # 🛠️ Исправлено: Убран лишний отступ (был сдвиг у doxyfile-path)
+      # Запускаем сборку через стандартный bash-шаг
       - name: Run Doxygen
-        uses: mattnotmitt/doxygen-action@edge
-        with:
-          doxyfile-path: './Doxyfile'
+        run: |
+          doxygen ./docs/Doxyfile
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # 🛠️ Важно проверить: путь к собранному HTML должен строго совпадать с OUTPUT_DIRECTORY в вашем Doxyfile.
-      # Если в Doxyfile указано OUTPUT_DIRECTORY = docs/, то Doxygen соберет всё в docs/html.
+      # Загружаем артефакт (убедитесь, что OUTPUT_DIRECTORY в Doxyfile указывает на docs/)
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
