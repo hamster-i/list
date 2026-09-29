@@ -36,10 +36,23 @@ jobs:
           rm -rf ./docs
           mkdir -p ./docs/html
 
-      # Запуск сборки
+      # Запуск сборки с автоматическим поиском конфигурации
       - name: Run Doxygen
         run: |
-          doxygen ./docs/Doxyfile
+          echo "=== Ищем файл конфигурации doxygen ==="
+          # Находим путь к файлу конфигурации (игнорируя регистр букв)
+          CONFIG_PATH=$(find . -iname "doxyfile" | head -n 1)
+          
+          if [ -z "$CONFIG_PATH" ]; then
+            echo "КРИТИЧЕСКАЯ ОШИБКА: Файл Doxyfile вообще не найден в репозитории!"
+            echo "Текущая структура проекта:"
+            ls -R
+            exit 1
+          fi
+          
+          echo "Файл конфигурации найден по пути: $CONFIG_PATH"
+          echo "=== Запуск сборки ==="
+          doxygen "$CONFIG_PATH"
 
       # Проверяем, появились ли сгенерированные файлы
       - name: Check generated files
