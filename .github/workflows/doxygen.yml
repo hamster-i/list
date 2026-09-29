@@ -1,6 +1,5 @@
 name: Generate Documentation
 
-# Запуск при каждом пуше в ветку main/master или вручную
 on:
   push:
     branches: [ "main", "master" ]
@@ -10,21 +9,23 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      # 1. Клонируем репозиторий
+      # 1. Скачиваем код вашего репозитория
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Запускаем Doxygen (он автоматически найдет ваш Doxyfile)
-      - name: Run Doxygen
-        uses: mattnotexist/doxygen-action@v1
-        with:
-          # Вы можете указать путь к вашему Doxyfile, если он лежит не в корне
-          doxyfile-path: './Doxyfile' 
+      # 2. Устанавливаем официальный Doxygen напрямую из системы
+      - name: Install and Run Doxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+          
+          # Запуск сборки документации (укажите правильный путь к Doxyfile, если он не в корне)
+          doxygen ./Doxyfile
 
-      # 3. (Опционально) Сохраняем готовую документацию как артефакт
+      # 3. Сохраняем готовую документацию в архив артефактов
       - name: Upload Artifacts
-        uses: actions/artifacts-action@v1 # Обновленный официальный экшен для работы с артефактами
+        uses: actions/upload-artifact@v4
         with:
           name: doxygen-docs
-          # Укажите папку, куда Doxygen складывает HTML (зависит от настроек в Doxyfile, обычно html или docs/html)
-          path: docs/html/ 
+          # Укажите папку, куда Doxygen складывает файлы (обычно html или docs/html)
+          path: html/
