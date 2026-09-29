@@ -24,20 +24,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 🛠️ СКАЧИВАЕМ ОФИЦИАЛЬНЫЙ БИНАРНИК С ПРАВИЛЬНОГО ЗЕРКАЛА (БЕЗ ДЕФЕКТНЫХ ССЫЛОК)
-      - name: Install Latest Doxygen (1.12.0) & Graphviz
+      # 🛠️ ГАРАНТИРОВАННАЯ УСТАНОВКА СВЕЖЕЙ ВЕРСИИ DOXYGEN 1.12.0
+      - name: Install Latest Doxygen & Graphviz
         run: |
           sudo apt-get update
           sudo apt-get install -y graphviz wget
           
-          # Скачиваем стабильный скомпилированный бинарник Doxygen напрямую с официального зеркала релизов
-          wget https://doxygen.nl
+          # Скачиваем официальный собранный бинарник Linux x64 с релизов GitHub с флагом перенаправления
+          wget -L https://github.com
+          
+          # Распаковываем
           tar -xzf doxygen-1.12.0.linux.bin.tar.gz
           
-          # Устанавливаем его в систему
+          # Принудительно заменяем старый системный doxygen на новый
           sudo cp doxygen-1.12.0/bin/doxygen /usr/local/bin/doxygen
+          sudo ln -sf /usr/local/bin/doxygen /usr/bin/doxygen
           
-          echo "=== ПРОВЕРКА ВЕРСИИ В СИСТЕМЕ ==="
+          echo "=== ПРОВЕРКА ИТОГОВОЙ ВЕРСИИ ==="
           doxygen --version
 
       # Очищаем папки перед генерацией
@@ -46,12 +49,12 @@ jobs:
           rm -rf ./docs
           mkdir -p ./docs/html
 
-      # Запуск сборки новой версией (из корня, где лежит ваш Doxyfile)
+      # Запуск сборки (файл Doxyfile лежит в корне проекта)
       - name: Run Doxygen
         run: |
           doxygen ./Doxyfile
 
-      # Проверяем файлы
+      # Проверяем файлы перед публикацией
       - name: Check generated files
         run: |
           echo "=== Список файлов для публикации ==="
