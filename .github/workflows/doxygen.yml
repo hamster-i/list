@@ -24,23 +24,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 🛠️ СКАЧИВАНИЕ ЧЕРЕЗ CURL С ДЕКЛАРАЦИЕЙ БРАУЗЕРА
-      - name: Install Latest Doxygen (1.12.0) & Graphviz
+      # 🛠️ НАДЕЖНАЯ УСТАНОВКА СВЕЖЕГО DOXYGEN ЧЕРЕЗ SNAP (БЕЗ СКАЧИВАНИЯ АРХИВОВ)
+      - name: Install Latest Doxygen via Snap & Graphviz
         run: |
           sudo apt-get update
-          sudo apt-get install -y graphviz curl
+          sudo apt-get install -y graphviz
           
-          # Скачиваем архив через curl, имитируя обычный браузер Chrome, чтобы обойти защиту
-          curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
-            -o doxygen.tar.gz \
-            https://github.com
-          
-          # Распаковываем полученный архив
-          tar -xzf doxygen.tar.gz
-          
-          # Заменяем старую системную версию на актуальную 1.17.0
-          sudo cp doxygen-1.17.0/bin/doxygen /usr/local/bin/doxygen
-          sudo ln -sf /usr/local/bin/doxygen /usr/bin/doxygen
+          # Устанавливаем официальный свежий Doxygen напрямую из Snap Store
+          sudo snap install doxygen --classic
           
           echo "=== ПРОВЕРКА ОБНОВЛЕННОЙ ВЕРСИИ ==="
           doxygen --version
