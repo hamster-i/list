@@ -43,6 +43,12 @@ jobs:
           ls -la ./docs/
           echo "=== Запуск сборки документации ==="
           doxygen ./docs/Doxyfile
+          
+      # Печатаем список сгенерированных файлов для проверки в логах
+      - name: Check generated files
+        run: |
+          echo "=== Проверка сгенерированных файлов ==="
+          ls -la ./docs_output/html/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
