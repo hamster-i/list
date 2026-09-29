@@ -24,27 +24,36 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 1. Устанавливаем официальный стабильный Doxygen напрямую в систему
-      - name: Install Doxygen & Graphviz
+      # 🛠️ ОБНОВЛЕНИЕ: Устанавливаем актуальный Doxygen 1.18.x через Homebrew
+      - name: Install Latest Doxygen via Homebrew
+        run: |
+          echo "=== Установка свежей версии Doxygen ==="
+          brew install doxygen
+          
+          # Добавляем путь Homebrew в системный PATH текущей сессии
+          echo "/home/linuxbrew/.linuxbrew/bin" >> $GITHUB_PATH
+
+      # Устанавливаем Graphviz для отрисовки классических диаграмм
+      - name: Install Graphviz
         run: |
           sudo apt-get update
-          sudo apt-get install -y doxygen graphviz
+          sudo apt-get install -y graphviz
 
-      # 2. Очищаем старые папки, чтобы гарантировать запись свежих файлов
+      # Очищаем папки перед сборкой для исключения кэширования старья
       - name: Clear old folders
         run: |
           rm -rf ./docs
-          mkdir -p ./docs_output/html
+          mkdir -p ./docs/html
 
-      # 3. Запускаем сборку (файл Doxyfile лежит в корне)
+      # Запуск сборки новой версией (из PATH подхватится бинарник Homebrew)
       - name: Run Doxygen
         run: |
-          echo "=== Проверяем версию Doxygen ==="
+          echo "=== Проверяем итоговую версию Doxygen ==="
           doxygen --version
           echo "=== Запуск сборки документации ==="
           doxygen ./Doxyfile
 
-      # 4. Проверяем, появились ли сгенерированные файлы на диске
+      # Проверяем, появились ли сгенерированные файлы на диске
       - name: Check generated files
         run: |
           echo "=== Список файлов для публикации ==="
@@ -53,7 +62,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # 5. Выгружаем созданную папку напрямую на хостинг
+      # Выгружаем созданную папку напрямую на хостинг
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
