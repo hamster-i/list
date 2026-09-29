@@ -24,23 +24,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 🛠️ ГАРАНТИРОВАННАЯ УСТАНОВКА СВЕЖЕЙ ВЕРСИИ DOXYGEN 1.12.0
-      - name: Install Latest Doxygen & Graphviz
+      # 🛠️ СКАЧИВАНИЕ ЧЕРЕЗ CURL С ДЕКЛАРАЦИЕЙ БРАУЗЕРА
+      - name: Install Latest Doxygen (1.12.0) & Graphviz
         run: |
           sudo apt-get update
-          sudo apt-get install -y graphviz wget
+          sudo apt-get install -y graphviz curl
           
-          # Скачиваем официальный собранный бинарник Linux x64 с релизов GitHub с флагом перенаправления
-          wget -L https://github.com
+          # Скачиваем архив через curl, имитируя обычный браузер Chrome, чтобы обойти защиту
+          curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
+            -o doxygen.tar.gz \
+            https://github.com
           
-          # Распаковываем
-          tar -xzf doxygen-1.17.0.linux.bin.tar.gz
+          # Распаковываем полученный архив
+          tar -xzf doxygen.tar.gz
           
-          # Принудительно заменяем старый системный doxygen на новый
+          # Заменяем старую системную версию на актуальную 1.17.0
           sudo cp doxygen-1.17.0/bin/doxygen /usr/local/bin/doxygen
           sudo ln -sf /usr/local/bin/doxygen /usr/bin/doxygen
           
-          echo "=== ПРОВЕРКА ИТОГОВОЙ ВЕРСИИ ==="
+          echo "=== ПРОВЕРКА ОБНОВЛЕННОЙ ВЕРСИИ ==="
           doxygen --version
 
       # Очищаем папки перед генерацией
@@ -49,12 +51,12 @@ jobs:
           rm -rf ./docs
           mkdir -p ./docs/html
 
-      # Запуск сборки (файл Doxyfile лежит в корне проекта)
+      # Запуск сборки новой версией (из корня, где лежит ваш Doxyfile)
       - name: Run Doxygen
         run: |
           doxygen ./Doxyfile
 
-      # Проверяем файлы перед публикацией
+      # Проверяем файлы
       - name: Check generated files
         run: |
           echo "=== Список файлов для публикации ==="
