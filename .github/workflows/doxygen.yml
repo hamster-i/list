@@ -40,7 +40,7 @@ jobs:
       - name: Clear old artifacts
         run: |
           rm -rf ./docs_output
-          mkdir -p ./docs_output/html
+          mkdir -p ./docs/html
 
       # Запускаем сборку (теперь нативной свежей версией doxygen из системы)
       - name: Run Doxygen
@@ -52,7 +52,7 @@ jobs:
       - name: Check generated files
         run: |
           echo "=== Список свежих файлов ==="
-          ls -la ./docs_output/html/
+          ls -la ./docs/html/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
