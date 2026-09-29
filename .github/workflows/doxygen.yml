@@ -24,40 +24,36 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 🛠️ ГАРАНТИРОВАННО УСТАНАВЛИВАЕМ ПОСЛЕДНЮЮ ВЕРСИЯ DOXYGEN НАПРЯМУЮ В СИСТЕМУ
-      - name: Setup Doxygen
-        uses: sillelien/setup-doxygen@v2
-        with:
-          doxygen-version: 'latest' # Автоматически скачает самую свежую версию с GitHub
-
-      # Устанавливаем Graphviz для отрисовки классических диаграмм связей
-      - name: Install Graphviz
+      # 1. Устанавливаем официальный стабильный Doxygen напрямую в систему
+      - name: Install Doxygen & Graphviz
         run: |
           sudo apt-get update
-          sudo apt-get install -y graphviz
+          sudo apt-get install -y doxygen graphviz
 
-      # Очищаем папки перед сборкой, чтобы избежать кэширования старья
-      - name: Clear old artifacts
+      # 2. Очищаем старые папки, чтобы гарантировать запись свежих файлов
+      - name: Clear old folders
         run: |
           rm -rf ./docs_output
-          mkdir -p ./docs/html
+          mkdir -p ./docs_output/html
 
-      # Запускаем сборку (теперь нативной свежей версией doxygen из системы)
+      # 3. Запускаем сборку (файл Doxyfile лежит в корне)
       - name: Run Doxygen
         run: |
-          doxygen --version # Выведет актуальную версию в логи для проверки
+          echo "=== Проверяем версию Doxygen ==="
+          doxygen --version
+          echo "=== Запуск сборки документации ==="
           doxygen ./Doxyfile
 
-      # Проверяем, что файлы физически появились на диске
+      # 4. Проверяем, появились ли сгенерированные файлы на диске
       - name: Check generated files
         run: |
-          echo "=== Список свежих файлов ==="
-          ls -la ./docs/html/
+          echo "=== Список файлов для публикации ==="
+          ls -la ./docs_output/html/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # Выгружаем готовую папку
+      # 5. Выгружаем созданную папку напрямую на хостинг
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
