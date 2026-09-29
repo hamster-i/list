@@ -48,7 +48,7 @@ jobs:
       - name: Check generated files
         run: |
           echo "=== Проверка сгенерированных файлов ==="
-          ls -la ./docs_output/html/
+          ls -la ./docs/html/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
