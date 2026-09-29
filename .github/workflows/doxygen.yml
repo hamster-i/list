@@ -27,4 +27,4 @@ jobs:
         with:
           name: doxygen-docs
           # Укажите папку, куда Doxygen складывает HTML (зависит от настроек в Doxyfile, обычно html или docs/html)
-          path: html/ 
+          path: docs/html/ 
