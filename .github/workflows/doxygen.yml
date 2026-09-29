@@ -24,36 +24,44 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Устанавливаем Doxygen и Graphviz из официального репозитория Ubuntu
-      - name: Install Doxygen & Graphviz
+      # 1. Устанавливаем только Graphviz, а Doxygen скачиваем СВЕЖИЙ вручную
+      - name: Install Latest Doxygen & Graphviz
         run: |
           sudo apt-get update
-          sudo apt-get install -y doxygen graphviz
+          sudo apt-get install -y graphviz wget python3
+          
+          # Скачиваем официальный стабильный бинарник свежей версии Doxygen
+          wget https://github.com
+          tar -f doxygen-1.12.0.linux.bin.tar.gz -xz
+          
+          # Принудительно заменяем системный doxygen на новый
+          sudo cp doxygen-1.12.0/bin/doxygen /usr/local/bin/doxygen
+          
+          # Проверяем версию в логах (должно выдать 1.12.0+)
+          echo "=== ИСПОЛЬЗУЕМАЯ ВЕРСИЯ DOXYGEN ==="
+          doxygen --version
 
-      # На всякий случай создаем структуру папок, чтобы исключить ошибку путей
-      - name: Prepare directories
+      # 2. Очищаем старые папки перед сборкой, чтобы исключить кэширование старья
+      - name: Clear old artifacts
         run: |
-          mkdir -p docs
-          mkdir -p docs/html
+          rm -rf ./docs
+          mkdir -p ./docs/html
 
-      # Запуск сборки с отладочной информацией
+      # 3. Запускаем сборку новой версией
       - name: Run Doxygen
         run: |
-          echo "=== Проверяем наличие Doxyfile ==="
-          ls -la ./docs/
-          echo "=== Запуск сборки документации ==="
-          doxygen ./docs/Doxyfile
-          
-      # Печатаем список сгенерированных файлов для проверки в логах
+          /usr/local/bin/doxygen ./docs/Doxyfile
+
+      # 4. Проверяем, что файлы сгенерированы именно сейчас
       - name: Check generated files
         run: |
-          echo "=== Проверка сгенерированных файлов ==="
+          echo "=== Список свежих файлов ==="
           ls -la ./docs/html/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # Загрузка собранного HTML-сайта
+      # 5. Выгружаем только что созданную папку
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
