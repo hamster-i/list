@@ -35,7 +35,7 @@ jobs:
       - name: Run Doxygen
         uses: mattnotmitt/doxygen-action@edge
         with:
-          doxyfile-path: './docs/Doxyfile'
+          doxyfile-path: './Doxyfile'
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
