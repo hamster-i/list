@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write # Требуется для записи и обновления страниц
   pages: write
   id-token: write
 
@@ -24,40 +24,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 🛠️ ОБНОВЛЕНИЕ: Устанавливаем актуальный Doxygen 1.18.x через Homebrew
-      - name: Install Latest Doxygen via Homebrew
-        run: |
-          echo "=== Установка свежей версии Doxygen ==="
-          brew install doxygen
-          
-          # Добавляем путь Homebrew в системный PATH текущей сессии
-          echo "/home/linuxbrew/.linuxbrew/bin" >> $GITHUB_PATH
-
-      # Устанавливаем Graphviz для отрисовки классических диаграмм
-      - name: Install Graphviz
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y graphviz
-
-      # Очищаем папки перед сборкой для исключения кэширования старья
-      - name: Clear old folders
-        run: |
-          rm -rf ./docs
-          mkdir -p ./docs/html
-
-      # Запуск сборки новой версией (из PATH подхватится бинарник Homebrew)
+      # 🛠️ ИСПОЛЬЗУЕМ ОФИЦИАЛЬНЫЙ ЭКШЕН С ЯВНЫМ УКАЗАНИЕМ АКТУАЛЬНОЙ ВЕРСИИ
       - name: Run Doxygen
-        run: |
-          echo "=== Проверяем итоговую версию Doxygen ==="
-          doxygen --version
-          echo "=== Запуск сборки документации ==="
-          doxygen ./Doxyfile
+        uses: DenverCoder1/doxygen-github-pages-action@v2.3.0
+        with:
+          doxygen_version: '1.12.0' # Указываем современную версию с поддержкой Mermaid
+          config_file: './Doxyfile' # Наш файл конфигурации в корне проекта
+          folder: 'docs/html' # Куда экшен принудительно сохранит результат
 
-      # Проверяем, появились ли сгенерированные файлы на диске
+      # Проверяем, появились ли сгенерированные файлы на диске виртуальной машины
       - name: Check generated files
         run: |
           echo "=== Список файлов для публикации ==="
-          ls -la ./docs/html/
+          ls -la ./docs_output/html/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
