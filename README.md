@@ -7,13 +7,12 @@
    ```mermaid
    graph LR;
     A(данные 1)--ссылка-->В(данные 2)--ссылка-->C(данные 3);
+	
+	%% Настройка цветов:
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style B fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff
    ```
  ---
-```mermaid
-erDiagram
-    USER ||--o{ ORDER : "размещает<br>заказ"
-```
----
  ## 💻 Программа
  
   - [Исходный код](https://github.com/hamster-i/list/tree/main/src)
