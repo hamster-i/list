@@ -24,23 +24,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 🛠️ НАДЕЖНАЯ УСТАНОВКА СВЕЖЕГО DOXYGEN ЧЕРЕЗ SNAP (БЕЗ СКАЧИВАНИЯ АРХИВОВ)
-      - name: Install Latest Doxygen via Snap & Graphviz
+      # Устанавливаем Python (он уже есть на машине, но мы фиксируем окружение)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      # 🛠️ ГАРАНТИРОВАННАЯ УСТАНОВКА СВЕЖЕГО DOXYGEN ЧЕРЕЗ PIP
+      - name: Install Latest Doxygen via PIP & Graphviz
         run: |
           sudo apt-get update
           sudo apt-get install -y graphviz
           
-          # Устанавливаем официальный свежий Doxygen напрямую из Snap Store
-          sudo snap install doxygen --classic
+          # Устанавливаем официальный свежий бинарник Doxygen через Python-пакет
+          pip install doxygen-binary
           
+          # Проверяем, где он находится, и выводим версию в логи
           echo "=== ПРОВЕРКА ОБНОВЛЕННОЙ ВЕРСИИ ==="
           doxygen --version
 
       # Очищаем папки перед генерацией
       - name: Clear old folders
         run: |
-          rm -rf ./docs
-          mkdir -p ./docs/html
+          rm -rf ./docs_output
+          mkdir -p ./docs_output/html
 
       # Запуск сборки новой версией (из корня, где лежит ваш Doxyfile)
       - name: Run Doxygen
@@ -51,7 +58,7 @@ jobs:
       - name: Check generated files
         run: |
           echo "=== Список файлов для публикации ==="
-          ls -la ./docs/html/
+          ls -la ./docs_output/html/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -60,7 +67,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'docs/html'
+          path: 'docs_output/html'
 
       - name: Deploy to GitHub Pages
         id: deployment
