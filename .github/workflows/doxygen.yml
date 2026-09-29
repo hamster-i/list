@@ -24,50 +24,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Просто устанавливаем Doxygen из встроенных пакетов Ubuntu 24.04
-      - name: Install Doxygen & Graphviz
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y doxygen graphviz
-
-      # Очищаем старые папки, чтобы не было конфликтов путей
-      - name: Clear old folders
-        run: |
-          rm -rf ./docs
-          mkdir -p ./docs/html
-
-      # Запуск сборки с автоматическим поиском конфигурации
-      - name: Run Doxygen
-        run: |
-          echo "=== Ищем файл конфигурации doxygen ==="
-          # Находим путь к файлу конфигурации (игнорируя регистр букв)
-          CONFIG_PATH=$(find . -iname "Doxyfile" | head -n 1)
-          
-          if [ -z "$CONFIG_PATH" ]; then
-            echo "КРИТИЧЕСКАЯ ОШИБКА: Файл Doxyfile вообще не найден в репозитории!"
-            echo "Текущая структура проекта:"
-            ls -R
-            exit 1
-          fi
-          
-          echo "Файл конфигурации найден по пути: $CONFIG_PATH"
-          echo "=== Запуск сборки ==="
-          doxygen "$CONFIG_PATH"
-
-      # Проверяем, появились ли сгенерированные файлы
-      - name: Check generated files
-        run: |
-          echo "=== Список созданных файлов для сайта ==="
-          ls -la ./docs/html/
+      # 🛠️ ИСПОЛЬЗУЕМ СВЕЖИЙ ЭКШЕН: Он автоматически скачает актуальный Doxygen (1.12.0+)
+      - name: Run Latest Doxygen
+        uses: mattnotmitt/doxygen-action@edge
+        with:
+          doxyfile-path: './Doxyfile' # Ссылка на файл в корне репозитория
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # Загружаем собранную папку
+      # 🛠️ ВАЖНО: Проверьте путь! Экшен mattnotmitt сохраняет html-код сайта
+      # строго туда, куда указывает параметр OUTPUT_DIRECTORY внутри вашего Doxyfile.
+      # Если в Doxyfile написано OUTPUT_DIRECTORY = ./docs_output, а HTML_OUTPUT = html,
+      # то путь ниже должен быть 'docs_output/html'.
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'docs/html'
+          path: 'docs_output/html'
 
       - name: Deploy to GitHub Pages
         id: deployment
