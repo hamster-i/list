@@ -24,22 +24,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Устанавливаем Python (он уже есть на машине, но мы фиксируем окружение)
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      # Устанавливаем Node.js (он необходим для npm)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.x'
+          node-version: '20'
 
-      # 🛠️ ГАРАНТИРОВАННАЯ УСТАНОВКА СВЕЖЕГО DOXYGEN ЧЕРЕЗ PIP
-      - name: Install Latest Doxygen via PIP & Graphviz
+      # 🛠️ ГАРАНТИРОВАННАЯ УСТАНОВКА АКТУАЛЬНОГО DOXYGEN ЧЕРЕЗ NPM & GRAPHVIZ
+      - name: Install Latest Doxygen via NPM & Graphviz
         run: |
           sudo apt-get update
           sudo apt-get install -y graphviz
           
-          # Устанавливаем официальный свежий бинарник Doxygen через Python-пакет
-          pip install doxygen-binary
+          # Устанавливаем официальный бинарник doxygen глобально в систему через npm
+          sudo npm install -g doxygen
           
-          # Проверяем, где он находится, и выводим версию в логи
+          # Принудительно связываем путь для глобального вызова команды в bash
+          sudo ln -sf $(which doxygen) /usr/local/bin/doxygen
+          
           echo "=== ПРОВЕРКА ОБНОВЛЕННОЙ ВЕРСИИ ==="
           doxygen --version
 
