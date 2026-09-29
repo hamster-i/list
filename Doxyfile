@@ -1,5 +1,8 @@
 PROJECT_NAME           = "Односвязный список"
-INPUT                  = .
+# КРИТИЧНО: Отключаем падение сборки при любых предупреждениях в коде
+WARN_AS_ERROR          = NO
+
+INPUT                  = ../src ../README.md
 
 FILE_PATTERNS          = *.c \
                          *.cc \
@@ -12,9 +15,9 @@ LAYOUT_FILE            = DoxygenLayout.xml
 
 RECURSIVE              = YES
 
-OUTPUT_DIRECTORY       = docs/
-
+OUTPUT_DIRECTORY       = .
 GENERATE_HTML          = YES
+HTML_OUTPUT            = html
 
 EXTRACT_ALL            = YES
 EXTRACT_STATIC         = YES
