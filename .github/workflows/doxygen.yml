@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: write # Требуется для записи и обновления страниц
+  contents: write # КРИТИЧНО: Экшен сам запишет файлы в ветку gh-pages
   pages: write
   id-token: write
 
@@ -24,19 +24,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 🛠️ ИСПОЛЬЗУЕМ ОФИЦИАЛЬНЫЙ ЭКШЕН С ЯВНЫМ УКАЗАНИЕМ АКТУАЛЬНОЙ ВЕРСИИ
+      # 🛠️ ИСПРАВЛЕНО: Версия экшена изменена на стабильную v2.0.0
       - name: Run Doxygen
-        uses: DenverCoder1/doxygen-github-pages-action@v2.3.0
+        uses: DenverCoder1/doxygen-github-pages-action@v2.0.0
         with:
-          doxygen_version: '1.12.0' # Указываем современную версию с поддержкой Mermaid
-          config_file: './Doxyfile' # Наш файл конфигурации в корне проекта
-          folder: 'docs/html' # Куда экшен принудительно сохранит результат
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          doxygen_version: '1.18.0'      # Скачается актуальная версия Doxygen
+          config_file: './Doxyfile'      # Файл ищется строго в корне проекта
+          folder: 'docs_output/html'     # Сюда сохранятся файлы (на основе вашего Doxyfile)
 
-      # Проверяем, появились ли сгенерированные файлы на диске виртуальной машины
+      # Проверяем, появились ли сгенерированные файлы на диске
       - name: Check generated files
         run: |
           echo "=== Список файлов для публикации ==="
-          ls -la ./docs_output/html/
+          ls -la ./docs/html/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
