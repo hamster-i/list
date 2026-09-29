@@ -15,7 +15,7 @@ LAYOUT_FILE            = DoxygenLayout.xml
 
 RECURSIVE              = YES
 
-OUTPUT_DIRECTORY       = docs
+OUTPUT_DIRECTORY       = ./docs
 GENERATE_HTML          = YES
 HTML_OUTPUT            = html
 
