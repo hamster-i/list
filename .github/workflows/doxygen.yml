@@ -43,8 +43,8 @@ jobs:
       # Очищаем папки перед генерацией
       - name: Clear old folders
         run: |
-          rm -rf ./docs_output
-          mkdir -p ./docs_output/html
+          rm -rf ./docs
+          mkdir -p ./docs/html
 
       # Запуск сборки новой версией (из корня, где лежит ваш Doxyfile)
       - name: Run Doxygen
@@ -55,7 +55,7 @@ jobs:
       - name: Check generated files
         run: |
           echo "=== Список файлов для публикации ==="
-          ls -la ./docs_output/html/
+          ls -la ./docs/html/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -64,7 +64,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'docs_output/html'
+          path: 'docs/html'
 
       - name: Deploy to GitHub Pages
         id: deployment
